@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.mapper">
+	<select id="selectBoard" resultType="com.example.demo.newBoard.UserVO">
+		SELECT postNum, postMan, postTitle, postMain, postTime  FROM freeboard
+	</select>
+	
+	<insert id="insertBoard" parameterType="com.example.demo.newBoard.UserVO">
+		INSERT INTO freeboard (postMan, postTitle, postMain) 
+		VALUES (#{postMan}, #{postTitle}, #{postMain})
+	</insert>
+	
+	<delete id="delBoard" parameterType="com.example.demo.newBoard.UserVO">
+		DELETE FROM freeboard WHERE postNum= #{postNum}
+	</delete>
+	
+	<update id="upPost" parameterType="com.example.demo.newBoard.UserVO">
+		UPDATE freeboard SET 
+		(postMan, postTitle, postMain) =
+		(#{postMan}, #{postTitle}, #{postMain})
+		WHERE postNum= #{postNum}
+		
+		<!-- UPDATE freeboard SET postMain='아아, 수정됐냐? 됐냐고' WHERE postNum= 7 -->
+	</update>
+	
+	<select id="detailPost" resultType="com.example.demo.newBoard.UserVO">
+		SELECT postNum, postMan, postTitle, postMain, postTime  
+		FROM freeboard WHERE postNum = #{postNum}
+	</select>
+	
+</mapper>
+
+
+<!-- select id="selectUser"는 사용될 자바 메소드와 이름이 같아야함 -->
+
+
