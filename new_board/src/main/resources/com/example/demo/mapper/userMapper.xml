@@ -15,23 +15,48 @@
 		DELETE FROM freeboard WHERE postNum= #{postNum}
 	</delete>
 	
-	<update id="upPost" parameterType="com.example.demo.newBoard.UserVO">
+	<update id="upPost" parameterType="com.example.demo.newBoard.UserVO" >
 		UPDATE freeboard SET 
-		(postMan, postTitle, postMain) =
-		(#{postMan}, #{postTitle}, #{postMain})
+		postTitle=#{postTitle}, postMain=#{postMain}
 		WHERE postNum= #{postNum}
 		
 		<!-- UPDATE freeboard SET postMain='아아, 수정됐냐? 됐냐고' WHERE postNum= 7 -->
 	</update>
 	
 	<select id="detailPost" resultType="com.example.demo.newBoard.UserVO">
-		SELECT postNum, postMan, postTitle, postMain, postTime  
+		SELECT postNum, postMan, postTitle, postMain, postTime, postView  
 		FROM freeboard WHERE postNum = #{postNum}
 	</select>
 	
+	<update id="increView" parameterType="com.example.demo.newBoard.UserVO">
+		UPDATE freeboard 
+		SET postView = postView+1 
+		WHERE postNum= #{postNum}
+	</update>
+	
+	<select id="totalrec" resultType="int">
+		SELECT count(*) FROM freeboard
+	</select>
+	
+	<select id="currentPage" resultType="Map">
+		SELECT postNum, postMan, postTitle, postTime, postView 
+		FROM freeboard ORDER BY postNum DESC LIMIT #{ListPage},5
+	</select>
+	
+	<!-- 글 상세보기에 노출될 댓글 리스트 조회 -->
+	<select id="selComment" resultType="Map">
+		SELECT ID, postNum, commentMain, depth, parent_ID  FROM commentdata
+		WHERE postNum=#{postNum}
+	</select>
+	
+	<!-- input 통해 입력된 값 댓글로 등록 -->
+	<!-- 대댓글 기능으로 depth  -->
+	<insert id="regicomment" parameterType="com.example.demo.newBoard.UserVO">
+	INSERT INTO commentdata (postNum, commentMain, depth, parent_ID)
+	VALUES (#{postNum}, #{postComment}, #{depth}, #{parent_ID})
+	</insert>
+
+	
 </mapper>
-
-
-<!-- select id="selectUser"는 사용될 자바 메소드와 이름이 같아야함 -->
 
 

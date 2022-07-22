@@ -1,5 +1,6 @@
 package com.example.demo.dto;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +36,25 @@ import com.example.demo.newBoard.UserVO;
 		return sqlSession.selectList(NAME_SPACE+"detailPost", PID);
 	}
 	
+	public int increView (UserVO PID) {
+		return sqlSession.update(NAME_SPACE+"increView", PID);
+				
+	} 
+	public int totalrec () {
+		return sqlSession.selectOne(NAME_SPACE+"totalrec");
+	}
+	
+	public List<Map<String, Object>> currentPage(int ListPage) {
+		return sqlSession.selectList(NAME_SPACE+"currentPage", ListPage);
+	}
+	
+	public List<Map<String, Object>> selComment(UserVO PID) { 
+		return sqlSession.selectList(NAME_SPACE+"selComment", PID); 
+		}
+	
+	public int regicomment(UserVO regicomm) {
+		return sqlSession.insert(NAME_SPACE+"regicomment", regicomm);
+	}
+	
+	
 }
-

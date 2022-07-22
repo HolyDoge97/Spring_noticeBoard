@@ -8,7 +8,7 @@ pageEncoding="UTF-8"%>
 	<center>
 		<h2>글 작성 페이지입니다.</h2>
 			<h3>
-				<a href="db">TEST space Here</a>
+				<a href="/list?currentPage=1">TEST space Here</a>
 			</h3>
 			
     <form action="insertPage" name="insert" method="post">

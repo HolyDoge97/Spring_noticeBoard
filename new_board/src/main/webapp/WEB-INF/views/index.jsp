@@ -8,7 +8,7 @@ pageEncoding="UTF-8"%>
 	<center>
 		<h2>Hello World</h2>
 			<h3>
-				<a href="db">글 목록</a>
+				<a href="list?currentPage=1">글 목록</a>
 			</h3>
 			
 			<h3>

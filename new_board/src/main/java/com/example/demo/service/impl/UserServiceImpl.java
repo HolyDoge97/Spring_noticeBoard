@@ -1,6 +1,7 @@
 package com.example.demo.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,5 +35,26 @@ public class UserServiceImpl{
 	public List<UserVO> selectDetail(UserVO PID) {
 		return userDAO.detailPost(PID);
 	}
+	
+	public int increView(UserVO PID) {
+		return userDAO.increView(PID);
+	}
+	
+	public int totalrec() {
+		return userDAO.totalrec();
+	}
+	
+	public List<Map<String, Object>> currentPage(int ListPage){
+		return userDAO.currentPage(ListPage);	
+	}
+	
+	public List<Map<String, Object>> selComment(UserVO PID){ 
+		return userDAO.selComment(PID); 
+	}
+	
+	public int regicomment(UserVO regicomm) {
+		return userDAO.regicomment(regicomm);
+	}
+	 
 }
 
