@@ -13,6 +13,8 @@ public class UserVO {
 	private Timestamp postTime;
 	private int postView;
 	private String postComment;
+	private int depth;
+	private int groupID;
 	
 	
 	//글 번호 영역
@@ -69,6 +71,22 @@ public class UserVO {
 	}
 	public void setPostComment(String postComment) {
 		this.postComment = postComment;
+	}
+	
+	// 댓글 depth영역
+	public int getDepth() {
+		return depth;
+	}
+	public void setDepth(int depth) {
+		this.depth = depth;
+	}
+	
+	// 댓글 groupID 영역
+	public int getGroupID() {
+		return groupID;
+	}
+	public void setGroupID(int groupID) {
+		this.groupID = groupID;
 	}
 }
 

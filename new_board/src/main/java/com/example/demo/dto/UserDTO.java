@@ -56,5 +56,9 @@ import com.example.demo.newBoard.UserVO;
 		return sqlSession.insert(NAME_SPACE+"regicomment", regicomm);
 	}
 	
+	public int regireply(UserVO regireply) {
+		return sqlSession.insert(NAME_SPACE+"regireply", regireply);
+	}
+	
 	
 }

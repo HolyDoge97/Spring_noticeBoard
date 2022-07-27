@@ -3,7 +3,8 @@
 
 <mapper namespace="com.example.demo.mapper">
 	<select id="selectBoard" resultType="com.example.demo.newBoard.UserVO">
-		SELECT postNum, postMan, postTitle, postMain, postTime  FROM freeboard
+		SELECT postNum, postMan, postTitle, postMain, postTime  
+		FROM freeboard ORDER BY postNum DESC
 	</select>
 	
 	<insert id="insertBoard" parameterType="com.example.demo.newBoard.UserVO">
@@ -45,17 +46,40 @@
 	
 	<!-- 글 상세보기에 노출될 댓글 리스트 조회 -->
 	<select id="selComment" resultType="Map">
-		SELECT ID, postNum, commentMain, depth, parent_ID  FROM commentdata
-		WHERE postNum=#{postNum}
+		WITH RECURSIVE A AS (
+			SELECT ID, postNum, commentMain, depth, parent_ID, groupID
+			FROM commentdata AS B WHERE depth=0 AND postNum=#{postNum}
+			UNION ALL 
+	
+			SELECT C.ID, C.postNum, C.commentMain, C.depth, C.parent_ID, C.groupID
+			FROM commentdata AS C 
+	
+			INNER JOIN A 
+			ON A.ID = C.parent_ID 
+			)
+		SELECT * FROM A ORDER BY GROUPID ASC, ID ASC, depth ASC
+
 	</select>
 	
-	<!-- input 통해 입력된 값 댓글로 등록 -->
-	<!-- 대댓글 기능으로 depth  -->
-	<insert id="regicomment" parameterType="com.example.demo.newBoard.UserVO">
-	INSERT INTO commentdata (postNum, commentMain, depth, parent_ID)
-	VALUES (#{postNum}, #{postComment}, #{depth}, #{parent_ID})
+	<!-- 본 게시물에 대한 댓글을 달때 사용되는 쿼리문 -->
+	<!-- 이 게시물로 작성된 댓글은 무조건 depth가 0으로 고정. groupID는 기존 테이블에서의 최대값+1로 insert됨 -->
+	<insert id="regicomment" parameterType="com.example.demo.newBoard.UserVO" >
+		<selectKey keyProperty="groupID" order="BEFORE" resultType="integer">
+			SELECT MAX(groupID)+1 FROM commentdata
+		</selectKey>	
+		INSERT INTO commentdata (postNum, commentMain, depth, groupID)
+		VALUES (#{postNum}, #{postComment}, #{depth}, #{groupID})
 	</insert>
-
+	
+	<!-- 본 게시물의 댓글이 아닌, 댓글에 대한 대댓글을 작성할 때 사용되는 쿼리문 -->
+	<!-- 프론트에서 groupID와 depth를 계산해서 보내야함 -->
+	<insert id="regireply" parameterType="com.example.demo.newBoard.UserVO">
+		<!-- <selectKey> 
+			SELECT groupID FROM commentdata where ID = #{으아아악}	
+		</selectKey> -->
+		INSERT INTO commentdata (postNum, commentMain, depth, groupID)
+		VALUES (#{postNum}, #{postComment}, #{depth}, #{groupID})
+	</insert>
 	
 </mapper>
 

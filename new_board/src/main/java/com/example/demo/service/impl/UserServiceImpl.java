@@ -55,6 +55,10 @@ public class UserServiceImpl{
 	public int regicomment(UserVO regicomm) {
 		return userDAO.regicomment(regicomm);
 	}
+	
+	public int regireply(UserVO regireply) {
+		return userDAO.regireply(regireply);
+	}
 	 
 }
 

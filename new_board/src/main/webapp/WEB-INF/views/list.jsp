@@ -58,7 +58,7 @@ String currentPage = request.getParameter("currentPage");
 
 </head>
 <body>
-${start1}
+
 	<h1>게시물 목록</h1>
 	
 	<h2><a href = "/">홈으로</a></h2>
@@ -68,8 +68,8 @@ ${start1}
 				<tr height="40">
 					<th width="100" style="background-color: BFE9F9">글ID</th>
 					<th width="200" style="background-color: BFE9F9">작성자</th>
-					<th width="500" style="background-color: BFE9F9">제목</th>
-					<th width="300" style="background-color: BFE9F9">작성일</th>
+					<th width="300" style="background-color: BFE9F9">제목</th>
+					<th width="200" style="background-color: BFE9F9">작성일</th>
 					<th width="100" style="background-color: BFE9F9">조회수</th>
 				</tr>
 			</thead>
@@ -106,6 +106,7 @@ ${start1}
 <c:if test="${tot!=curr}">
 	<a href="/list?currentPage=${End+1}">Next</a>
 </c:if>
+
 
 		 
 		<form action="deletePost" name="delete" method="post">
