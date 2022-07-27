@@ -101,7 +101,7 @@ public class DatabaseController{
 				int result=service.regicomment(regicomm);
 				System.out.println(result);
 		}
-		
+		 
 		@PostMapping("/regiReply")
 			public void regiReply(UserVO regireply) {
 			int result=service.regireply(regireply);

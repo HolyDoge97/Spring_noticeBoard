@@ -39,7 +39,7 @@ import com.example.demo.newBoard.UserVO;
 	public int increView (UserVO PID) {
 		return sqlSession.update(NAME_SPACE+"increView", PID);
 				
-	} 
+	}  
 	public int totalrec () {
 		return sqlSession.selectOne(NAME_SPACE+"totalrec");
 	}

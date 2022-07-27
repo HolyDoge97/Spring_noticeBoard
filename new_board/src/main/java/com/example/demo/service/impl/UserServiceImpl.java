@@ -39,7 +39,7 @@ public class UserServiceImpl{
 	public int increView(UserVO PID) {
 		return userDAO.increView(PID);
 	}
-	
+	 
 	public int totalrec() {
 		return userDAO.totalrec();
 	}
