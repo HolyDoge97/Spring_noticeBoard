@@ -15,6 +15,7 @@ public class UserVO {
 	private String postComment;
 	private int depth;
 	private int groupID;
+	private int parent_ID;
 	
 	
 	//글 번호 영역
@@ -87,6 +88,14 @@ public class UserVO {
 	}
 	public void setGroupID(int groupID) {
 		this.groupID = groupID;
+	}
+	
+	// 대댓글 부모 아이디 영역
+	public int getParent_ID() {
+		return parent_ID;
+	}
+	public void setParent_ID(int parent_ID) {
+		this.parent_ID = parent_ID;
 	}
 }
 

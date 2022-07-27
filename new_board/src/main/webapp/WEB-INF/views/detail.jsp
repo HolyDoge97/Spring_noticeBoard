@@ -99,20 +99,22 @@ function regiComment(){
 /* ------------------대댓글 작성 스크립트------------------ */
 
 /* 댓글등록 버튼 클릭시 input 노출 스크립트 */
-function popReply(event) {
+function popReply(event, PostNum, Depth, GroupID, Parent_ID) {
 	var popTag = '<th>'+
 					 '<input class="replyInputTag" id="reply_text" type="text" value=" " />'+
-					 '<input class="replyInputButton" id="reply_button" type="button" value="등" onclick="regiReply(event)" />'+
+					 '<input class="replyInputButton" id="reply_button" type="button" value="등"'+
+					 'onclick="regiReply(event,'+PostNum+','+Depth+','+GroupID+','+Parent_ID+')" />'+
 				 '</th>';
 	$(event.target).parent().parent().append(popTag);
 }
 
 /* 댓글 내용 컨트롤러 전송 스트립트 */
-function regiReply(event){
-	var replyMain= (reply_text).value;
-	var postNum = document.getElementById("idPostnum").innerText; //문제 없음
-	var depth = document.getElementById("idDepth").innerText; // 
-	var groupID = document.getElementById("idGid").innerText; //
+function regiReply(event, PostNum, Depth, GroupID, Parent_ID){
+	var replyMain = $(event.target).prev().val();
+	/* var replyMain= (reply_text).value; */
+	var postNum = PostNum; //문제 없음
+	var depth = Depth+1;
+	var groupID = GroupID;
 	var answer = confirm("등록하시겠습니까?");
 	 if(answer) {
 		$.ajax({
@@ -120,8 +122,9 @@ function regiReply(event){
 			type: "post" ,
 			data : {"postNum" : postNum,
 					"postComment" : replyMain,
-					"depth" : depth+1,
-					"groupID" : groupID
+					"depth" : depth,
+					"groupID" : groupID,
+					"parent_ID" : Parent_ID
 					},
 			datatype : "json" ,			
 			error : function(){
@@ -134,7 +137,7 @@ function regiReply(event){
 				$('#commentList').load(location.href+ ' #commentList');
 			}
 		});
-	}	
+	}
 }
 /* ------------------대댓글 작성 스크립트------------------ */
 function commDel(){
@@ -199,9 +202,9 @@ function commEdit() {
 						<th id="commentParent" width="700" 
 						style="background-color: E4F2FF;font-size:14px;text-align:left;">
 						&nbsp;&nbsp;${comm.commentMain}</th> 
-						<th class="postNoDisplay" id="idPostnum">${comm.postNum}</th> 
+						<%-- <th class="postNoDisplay" id="idPostnum">${comm.postNum}</th> 
 						<th class="postNoDisplay" id="idDepth">${comm.depth}</th> 
-						<th class="postNoDisplay" id="idGid">${comm.groupID}</th> 
+						<th class="postNoDisplay" id="idGid">${comm.groupID}</th> --%> 
 							<th>
 								<input class="commentButton" id="commdel" name="commdel"
 									type="button" value="삭" 
@@ -213,7 +216,7 @@ function commEdit() {
 									style="background-color: 30C1FF;font-size:14px;"/>
 								<input class="commentButton" id="commreply" name="commreply"
 									type="button" value="댓" 
-									onclick="popReply(event)"
+									onclick="popReply(event, ${comm.postNum}, ${comm.depth}, ${comm.groupID})"
 									style="background-color: 30C1FF;font-size:14px;"/>
 							</th>	
 					</tr>	
@@ -226,9 +229,9 @@ function commEdit() {
 								&nbsp;&nbsp;
 							</c:forEach>
 							&nbsp;&nbsp;⇒&nbsp;${comm.commentMain}</th> 
-							<th class="postNoDisplay" id="idPostnum">${comm.postNum}</th> 
+							<%-- <th class="postNoDisplay" id="idPostnum">${comm.postNum}</th> 
 							<th class="postNoDisplay" id="idDepth">${comm.depth}</th> 
-							<th class="postNoDisplay" id="idGid">${comm.groupID}</th>  
+							<th class="postNoDisplay" id="idGid">${comm.groupID}</th> --%>  
 							<th>
 								<input class="commentButton" id="commdel" name="commdel"
 									type="button" value="삭" 
@@ -240,7 +243,7 @@ function commEdit() {
 									style="background-color: 30C1FF;font-size:14px;"/>
 								<input class="commentButton" id="commreply"  name="commreply"
 									type="button" value="댓" 
-									onclick="popReply(event)"
+									onclick="popReply(event, ${comm.postNum}, ${comm.depth}, ${comm.groupID}, ${comm.parent_ID})"
 									style="background-color: 30C1FF;font-size:14px;"/>
 							</th>
 					</tr>

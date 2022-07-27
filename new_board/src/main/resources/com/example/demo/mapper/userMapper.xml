@@ -77,8 +77,8 @@
 		<!-- <selectKey> 
 			SELECT groupID FROM commentdata where ID = #{으아아악}	
 		</selectKey> -->
-		INSERT INTO commentdata (postNum, commentMain, depth, groupID)
-		VALUES (#{postNum}, #{postComment}, #{depth}, #{groupID})
+		INSERT INTO commentdata (postNum, commentMain, depth, groupID, parent_ID)
+		VALUES (#{postNum}, #{postComment}, #{depth}, #{groupID}, #{parent_ID})
 	</insert>
 	
 </mapper>
