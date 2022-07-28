@@ -59,6 +59,17 @@ public class UserServiceImpl{
 	public int regireply(UserVO regireply) {
 		return userDAO.regireply(regireply);
 	}
+	
+	public int delcomment(UserVO delcom) {
+		return userDAO.delcomment(delcom);
+	}
+	public int editcomment(UserVO edit) {
+		return userDAO.editcomment(edit);
+	}
+	
+	public int backupcomment(UserVO edit) {
+		return userDAO.backupcomment(edit);
+	}
 	 
 }
 

@@ -81,6 +81,26 @@
 		VALUES (#{postNum}, #{postComment}, #{depth}, #{groupID}, #{parent_ID})
 	</insert>
 	
+	<update id="DELSHOW" parameterType="com.example.demo.newBoard.UserVO">
+		UPDATE commentdata SET 
+		commentMain="삭제된 댓글입니다." WHERE ID=#{ID}
+	</update>
+	
+	<delete id="delcomment" parameterType="com.example.demo.newBoard.UserVO">
+		DELETE FROM commentdata WHERE ID=#{ID}
+	</delete>
+	
+	<update id="editcomment" parameterType="com.example.demo.newBoard.UserVO">
+		UPDATE commentdata SET 
+		commentMain=#{commentMain} WHERE ID=#{ID}
+	</update>
+	
+	<insert id="backupcomment" parameterType="com.example.demo.newBoard.UserVO">
+		INSERT INTO deledcomment (ID, postNum, commentMain, depth, parent_ID, groupID)
+		SELECT ID, postNum, commentMain, depth, parent_ID, groupID 
+		FROM commentdata WHERE ID=#{ID}
+	</insert>
+	
 </mapper>
 
 

@@ -50,7 +50,7 @@ import com.example.demo.newBoard.UserVO;
 	
 	public List<Map<String, Object>> selComment(UserVO PID) { 
 		return sqlSession.selectList(NAME_SPACE+"selComment", PID); 
-		}
+	}
 	
 	public int regicomment(UserVO regicomm) {
 		return sqlSession.insert(NAME_SPACE+"regicomment", regicomm);
@@ -59,6 +59,18 @@ import com.example.demo.newBoard.UserVO;
 	public int regireply(UserVO regireply) {
 		return sqlSession.insert(NAME_SPACE+"regireply", regireply);
 	}
+	
+	public int delcomment(UserVO delcom) {
+		return sqlSession.delete(NAME_SPACE+"delcomment", delcom);
+	}
+	
+	public int editcomment(UserVO edit) {
+		return sqlSession.update(NAME_SPACE+"editcomment", edit);
+	}
+	public int backupcomment(UserVO edit) {
+		return sqlSession.insert(NAME_SPACE+"backupcomment", edit);
+	}
+	
 	
 	
 }

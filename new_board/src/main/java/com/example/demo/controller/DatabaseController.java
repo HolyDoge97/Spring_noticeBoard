@@ -107,6 +107,20 @@ public class DatabaseController{
 			int result=service.regireply(regireply);
 			System.out.println(result);
 		}
+		
+		@PostMapping("/delcomment")
+			public void delcomment(UserVO delcom) {
+			service.backupcomment(delcom);
+			int result = service.delcomment(delcom);
+			System.out.println(result);
+		}
+		
+		@PostMapping("/edit_delcomment")
+			public void editcomment(UserVO edit) {
+			service.backupcomment(edit);
+			int result = service.editcomment(edit);
+			System.out.println(result);
+		}
 
 	
 

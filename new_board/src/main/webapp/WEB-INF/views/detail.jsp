@@ -140,12 +140,59 @@ function regiReply(event, PostNum, Depth, GroupID, Parent_ID){
 	}
 }
 /* ------------------대댓글 작성 스크립트------------------ */
-function commDel(){
-	alert("공사중");	
+function commDel(commentID, depth){
+	var deld = "삭제된 댓글입니다.";
+	var answer = confirm("삭제하시겠습니까?");
+	if(depth==0){
+		if(answer) {
+				$.ajax({
+					url:"/delcomment",
+					type:"post",
+					data: {"ID" : commentID},
+					datatype : "json",
+					error : function() {
+						$('#commentList').load(location.href+ ' #commentList');
+					},
+					success : function() {
+						$('#commentList').load(location.href+ ' #commentList');
+					}
+				});
+			}
+		}	
+	else {
+		$.ajax({
+			url:"/edit_delcomment",
+			type:"post",
+			data: {"ID" : commentID,
+				   "commentMain" : deld},
+			datatype : "json",
+			error : function() {
+				$('#commentList').load(location.href+ ' #commentList');
+			},
+			success : function() {
+				$('#commentList').load(location.href+ ' #commentList');
+			}
+		});	
+	}
 }
 
-function commEdit() {
-	alert("공사중");
+
+function commEdit(commentID) {
+	var answer = confirm("수정하시겠습니까?");
+	if(answer) {
+		$.ajax({
+			url:"/editcomment",
+			type:"post",
+			data: {"ID" : commentID},
+			datatype : "json",
+			error: function(){
+				$('#commentList').load(location.href+ ' #commentList');
+				},
+			success: function(){
+				$('#commentList').load(location.href+ ' #commentList');
+			}
+		});
+	}
 }
 
 </script>
@@ -208,11 +255,11 @@ function commEdit() {
 							<th>
 								<input class="commentButton" id="commdel" name="commdel"
 									type="button" value="삭" 
-									onclick="commDel()"
+									onclick="commDel(${comm.ID}, ${comm.depth})"
 									style="background-color: 30C1FF;font-size:14px;"/> 
 								<input class="commentButton" id="commedit" name="commedit"
 									type="button" value="수" 
-									onclick="commEdit()"
+									onclick="commEdit(${comm.ID})"
 									style="background-color: 30C1FF;font-size:14px;"/>
 								<input class="commentButton" id="commreply" name="commreply"
 									type="button" value="댓" 
@@ -235,11 +282,11 @@ function commEdit() {
 							<th>
 								<input class="commentButton" id="commdel" name="commdel"
 									type="button" value="삭" 
-									onclick="commDel()"
+									onclick="commDel(${comm.ID}, ${comm.depth})"
 									style="background-color: 30C1FF;font-size:14px;"/> 
 								<input class="commentButton" id="commedit"  name="commedit"
 									type="button" value="수" 
-									onclick="commEdit()"
+									onclick="commEdit(${comm.ID})"
 									style="background-color: 30C1FF;font-size:14px;"/>
 								<input class="commentButton" id="commreply"  name="commreply"
 									type="button" value="댓" 

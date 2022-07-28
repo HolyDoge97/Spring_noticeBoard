@@ -12,10 +12,11 @@ public class UserVO {
 	private String postMain;
 	private Timestamp postTime;
 	private int postView;
-	private String postComment;
+	private String commentMain;
 	private int depth;
 	private int groupID;
 	private int parent_ID;
+	private int ID;
 	
 	
 	//글 번호 영역
@@ -67,11 +68,11 @@ public class UserVO {
 	}
 	
 	// 댓글 영역
-	public String getPostComment() {
-		return postComment;
+	public String getCommentMain() {
+		return commentMain;
 	}
-	public void setPostComment(String postComment) {
-		this.postComment = postComment;
+	public void setCommentMain(String commentMain) {
+		this.commentMain = commentMain;
 	}
 	
 	// 댓글 depth영역
@@ -96,6 +97,14 @@ public class UserVO {
 	}
 	public void setParent_ID(int parent_ID) {
 		this.parent_ID = parent_ID;
+	}
+	
+	// 댓글~대댓글 ID영역
+	public int getID() {
+		return ID;
+	}
+	public void setID(int ID) {
+		this.ID = ID;
 	}
 }
 
