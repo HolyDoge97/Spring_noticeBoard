@@ -115,6 +115,7 @@ function regiReply(event, PostNum, Depth, GroupID, Parent_ID){
 	var postNum = PostNum; //문제 없음
 	var depth = Depth+1;
 	var groupID = GroupID;
+	var parentid = Parent_ID;
 	var answer = confirm("등록하시겠습니까?");
 	 if(answer) {
 		$.ajax({
@@ -124,7 +125,7 @@ function regiReply(event, PostNum, Depth, GroupID, Parent_ID){
 					"postComment" : replyMain,
 					"depth" : depth,
 					"groupID" : groupID,
-					"parent_ID" : Parent_ID
+					"parent_ID" : parentid
 					},
 			datatype : "json" ,			
 			error : function(){
@@ -140,6 +141,7 @@ function regiReply(event, PostNum, Depth, GroupID, Parent_ID){
 	}
 }
 /* ------------------대댓글 작성 스크립트------------------ */
+/* ---------- 댓글 및 대댓글 삭제 스크립트---------- */
 function commDel(commentID, depth){
 	var deld = "삭제된 댓글입니다.";
 	var answer = confirm("삭제하시겠습니까?");
@@ -175,7 +177,9 @@ function commDel(commentID, depth){
 		});	
 	}
 }
+/* ---------- 댓글 및 대댓글 삭제 스크립트---------- */
 
+/* ---------- 댓글 및 대댓글 수정 스크립트---------- */
 
 function commEdit(commentID) {
 	var answer = confirm("수정하시겠습니까?");
@@ -263,7 +267,7 @@ function commEdit(commentID) {
 									style="background-color: 30C1FF;font-size:14px;"/>
 								<input class="commentButton" id="commreply" name="commreply"
 									type="button" value="댓" 
-									onclick="popReply(event, ${comm.postNum}, ${comm.depth}, ${comm.groupID})"
+									onclick="popReply(event, ${comm.postNum}, ${comm.depth}, ${comm.groupID}, ${comm.parent_ID})"
 									style="background-color: 30C1FF;font-size:14px;"/>
 							</th>	
 					</tr>	
@@ -276,9 +280,7 @@ function commEdit(commentID) {
 								&nbsp;&nbsp;
 							</c:forEach>
 							&nbsp;&nbsp;⇒&nbsp;${comm.commentMain}</th> 
-							<%-- <th class="postNoDisplay" id="idPostnum">${comm.postNum}</th> 
-							<th class="postNoDisplay" id="idDepth">${comm.depth}</th> 
-							<th class="postNoDisplay" id="idGid">${comm.groupID}</th> --%>  
+							<th class="postNoDisplay" id="idParID">${comm.parent_ID}</th> 
 							<th>
 								<input class="commentButton" id="commdel" name="commdel"
 									type="button" value="삭" 

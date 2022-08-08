@@ -12,6 +12,7 @@ public class UserVO {
 	private String postMain;
 	private Timestamp postTime;
 	private int postView;
+	private String postComment;
 	private String commentMain;
 	private int depth;
 	private int groupID;
@@ -105,6 +106,13 @@ public class UserVO {
 	}
 	public void setID(int ID) {
 		this.ID = ID;
+	}
+	
+	public String getPostComment() {
+		return postComment;
+	}
+	public void setPostComment(String postComment) {
+		this.postComment = postComment;
 	}
 }
 
