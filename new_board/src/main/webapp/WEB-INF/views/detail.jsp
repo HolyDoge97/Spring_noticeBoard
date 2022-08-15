@@ -71,7 +71,7 @@ function DeletePost() {
 
 /* ------------------댓글 작성 스크립트------------------ */
 function regiComment(){
-	var postNum= <%=Postnum%>
+	var postNum= <%=Postnum%>;
 	var postComment = document.getElementById("inputComment").value;
 	var answer = confirm("등록하시겠습니까?"); 
 	if(answer) {
