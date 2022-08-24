@@ -6,14 +6,14 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.dto.UserDTO;
+import com.example.demo.dto.UserDAO;
 import com.example.demo.newBoard.UserVO;
 
 @Service
 public class UserServiceImpl{
 
 	@Autowired
-	private UserDTO userDAO;
+	private UserDAO userDAO;
 	
 	
 	public List<UserVO> select() throws Exception {
